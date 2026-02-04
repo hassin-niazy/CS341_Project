@@ -1,4 +1,7 @@
-var fs = require('fs');
+//Author: Hassinullah Niazy
+
+var fs = 
+require('fs');
 
 test('test selectEvent', () => {
     //Read the index.html file into a string

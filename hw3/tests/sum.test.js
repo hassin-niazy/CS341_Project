@@ -1,3 +1,4 @@
+//Author: Hassinullah Niazy
 
 const sum = require('../public/javascripts/sum.js');
     test('adds 1 + 2 to equal 3', () => {

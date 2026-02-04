@@ -1,4 +1,6 @@
 //This is the javascript code for our App.
+//Author: Hassinullah Niazy
+
 
 eventHandler = function(event){
 
