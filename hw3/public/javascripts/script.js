@@ -1,5 +1,16 @@
 //This is the javascript code for our App.
 
+eventHandler = function(event){
+
+/* do stuff */
+
+}
+$(function(){
+    $(".foo").click(eventHandler);
+});
+
+
+
             //Events when button clicked
             $("#myButton1").click(function(){
                 
