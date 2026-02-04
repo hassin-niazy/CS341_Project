@@ -1,0 +1,175 @@
+<!-- 
+    Homework 1 - HTML and CSS
+    AUTHOR: Hassinullah Niazy 
+    DATE: 01/21/2026
+-->
+<!DOCTYPE html>
+<html>
+
+<!-- Webpage Header -->
+<head>
+    
+    <!-- Adding Javascript to our website -->
+    <script 
+        src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+    </script>
+
+
+
+    <meta charset="UTF-8">
+    <title>Cheesecake Order Form</title>
+    <link rel="stylesheet" href="stylesheets\style.css">
+
+</head>
+
+<!-- Webpage body -->
+<body>
+    <header>
+        <h1>Cheesecake Order Form</h1>
+    </header>
+
+    <!-- Image added from online source -->
+    <img src="https://upload.wikimedia.org/wikipedia/commons/9/9c/Mondays_at_Il_Forno_-_Cheesecake_with_strawberry_sauce.jpg" class="image1"><br>
+
+    <!-- Div for radio-buttons and quantity area-->
+    <div class="middleToppingDiv" id="OrderDiv">
+
+        <!-- Quantity Topping -->
+        <Label class="quantity">Quantity Topping</Label><br>
+        
+        <!-- Top Radio -->
+        <input id="radio" type="radio" class="toppingPlChoco" name="radio" value="Plain">
+        <label for="plain">Plain</label><br>
+
+        <!-- Dropdown -->
+        <select class="qty" id="qty">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+        </select>
+
+        <!-- middle Radio -->
+        <input id="radio" type="radio" class="toppingCherry" name="radio" value="Cherry">
+        <label for="cherry">Cherry</label><br>
+        
+        <!-- Bottom Radio -->
+        <input id="radio" type="radio" class="toppingPlChoco" name="radio" value="Chocolate">
+        <label for="Chocolate">Chocolate</label><br>
+
+        <!-- Label for Text Area -->
+        <label for="notes" class="note1">Notes:</label>
+
+    </div>
+    <!-- Div for radio-buttons and quantity area-->
+    <div class="confirmationDiv" id="hiddenDiv">
+        <h4>Thank you! your order has been placed</h4>
+        <p id="quantity"></p>
+        <p id="topping"></p>
+        <p id="comment"></p>
+
+    </div>
+
+    <!-- Notes Area -->
+    <textarea id="notes" rows="4" cols="60" placeholder="Enter any special instructions here."></textarea><br>    
+
+    <!-- Button for ordering -->
+    <button class="my-btn" id="myButton1">Order</button>
+
+    <!-- For the dropdown hover menu, I used some ChatGPT and some w3schools to find the correct tags. -->
+    <!-- Div for Orders by Month -->
+    <div class="totalDiv">
+        <div class="header">
+        <h3>Orders for <span class="month-widget" id="currentMonth">Jan</span></h3>
+            <div class="month-dropdown" id="monthDropdown">
+                <div>Jan</div>
+                <div>Feb</div>
+                <div>Mar</div>
+                <div>Apr</div>
+                <div>May</div>
+                <div>Jun</div>
+                <div>Jul</div>
+                <div>Aug</div>
+                <div>Sep</div>
+                <div>Oct</div>
+                <div>Nov</div>
+                <div>Dec</div>
+            </div>
+        </div>
+
+        <!-- Unordered List -->
+        <ul>
+            <li>11 cherry</li>
+            <li>17 chocolate</li>
+            <li>31 plain</li>
+        </ul>
+    </div>
+
+
+
+    <script>
+
+            //Events when button clicked
+            $("#myButton1").click(function(){
+                
+                // Variables to store our customer entered values-->
+                var noteVegan = $("#notes").val().trim().toLowerCase();
+                var note = $("#notes").val();
+                var topping = $("input[name='radio']:checked").val();
+                var quantity = $("#qty").val();
+
+                if (noteVegan === "vegan"){
+                    alert("The cheesecake has dairy.")
+                } else {
+
+                    $("#OrderDiv").hide();
+                    $("#notes").hide();
+                    $("#myButton1").hide();
+
+                    $("#quantity").text("Quantity: " + quantity);
+                    $("#topping").text("Topping: " + topping);
+                    $("#comment").text("Note: " + note);
+
+                    $("#hiddenDiv").show();   
+                }
+            });
+            
+            // For the dropdown hover menu, I used some ChatGPT and some w3schools to find the correct tags.
+           // Show dropdown on hover
+            $("#currentMonth").hover(
+                function() {
+                $("#monthDropdown").stop(true, true).slideDown(200);
+                },
+                function() {
+
+                // Delay hiding so user can move to dropdown
+                setTimeout(function() {
+                    if (!$("#monthDropdown").is(":hover")) 
+                    { $("#monthDropdown").slideUp(200);
+                    }
+
+                }, 200);
+                }
+            );
+
+            // Keep dropdown open if hovering over it
+            $("#monthDropdown").hover(
+                function() {
+                $(this).stop(true, true).show();
+                },
+                function() {
+                $(this).slideUp(200);
+                }
+            );
+
+            // Click on a month to select it
+            $("#monthDropdown div").click(function() {
+                var selectedMonth = $(this).text();
+                $("#currentMonth").text(selectedMonth);
+                $("#monthDropdown").slideUp(200);
+            }); 
+       
+    </script>
+
+</body>
+
+</html>

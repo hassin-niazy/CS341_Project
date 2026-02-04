@@ -1,8 +1,143 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+/*
+    Homework 1 - HTML and CSS
+    AUTHOR: Hassinullah Niazy 
+    DATE: 01/21/2026
+*/
+
+/* Webpage body */
+body {  
+    background-image: url('https://media.istockphoto.com/id/880710798/vector/seamless-vector-bakery-pastry-pattern.jpg?s=612x612&w=0&k=20&c=e5TN-lIQoRhqrdIoJhUs_VfhzcmDxEY869s6s1SRYF8=');
+    background-size: 50%;
+    background-repeat: repeat;
 }
 
-a {
-  color: #00B7FF;
+/* Main Header */
+h1{
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 50px;
+    color: #fffcda;
+    -webkit-text-stroke: 2px #000000;  
+}
+
+/* Cheesecake image */
+.image1 {
+    border: 1px solid #fffada;
+    width: 300px;
+    height: 300px;
+    filter: brightness(1.3);
+}
+
+/* Topping Quantity */
+.quantity {
+    margin-left: 5px;
+}
+
+/* Dropdown */
+.qty {
+    margin-left: 5px;
+}
+
+/* Top and bottom Radio Buttons */
+.toppingPlChoco {
+    transform: scale(0.7);
+    margin-left: 65px; 
+}
+
+/* Center Radio Button */
+.toppingCherry {
+    transform: scale(0.7);
+    margin-left: 19px;
+}
+
+/* Note label */
+.note1 {
+    font-style: bold;
+    margin-left: 5px;
+}
+
+/* Order button */
+.my-btn {
+    background-color: #fffcda;
+    font-size: 15px;
+    color: rgb(0, 0, 0);
+    padding: 5px 20px;
+    margin-top: 15px;
+    border-radius: 5px;
+}
+
+/* Div for Total Oders box */
+.totalDiv{
+    outline: 1px solid #000000;
+    margin-top: 15px;
+    height: 150px;
+    width: 250px;
+    background-color: #fffcda;
+}
+
+/* Total Orders Last Month */
+h3 { 
+    margin-top: 15px;
+    margin-left: 5px;
+    padding: 5px;
+}
+
+/* Div for Toppings box */
+.middleToppingDiv{
+    border: 1px solid black;
+    height: 100px;
+    width: 200px;
+    background-color: #fffcda;
+    margin-bottom: -1.5px;
+}
+
+/* Div for Confirmation Box*/
+.confirmationDiv{
+    display: none;
+    height: 200px;
+    padding: 5px;
+    width: 350px;
+    background-color: #fffcda;
+    margin-bottom: -1.5px;
+
+}
+
+
+/* For the dropdown hover menu, I used some ChatGPT and some w3schools to find the correct tags. */
+/* Widget for month */
+.month-widget {
+    display: inline-block;
+    padding: 5px 8px;
+    border:  1px solid #ccc;
+    background-color: #fffaaa;
+    cursor: pointer;
+    position: relative;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+.month-widget:hover {
+    background-color: #fff000;
+}
+
+/* Dropdown menu styling */
+.month-dropdown {
+    display: none; /* hidden by default */
+    position: absolute;
+    top: 100%;
+    left: 15%;
+    width: 80px;
+    max-height: 100px; /* small height */
+    overflow-y: auto;  /* vertical scroll if needed */
+    border: 1px solid #ccc;
+    background-color: #fffaaa;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+/* Dropdown items */
+.month-dropdown div {
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.month-dropdown div:hover {
+    background-color: #fff000;
 }
