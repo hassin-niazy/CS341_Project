@@ -1,17 +1,21 @@
 //This is the javascript code for our App.
 //Author: Hassinullah Niazy
 
+/* 
 
 eventHandler = function(event){
 
-/* do stuff */
+/* do stuff 
 
 }
-$(function(){
-    $(".foo").click(eventHandler);
-});
 
+*/
 
+// $(function(){
+   // $(".foo").click(eventHandler);
+// });
+
+$(document).ready(function() {
 
             //Events when button clicked
             $("#myButton1").click(function(){
@@ -73,3 +77,4 @@ $(function(){
                 $("#monthDropdown").slideUp(200);
             }); 
        
+        });
