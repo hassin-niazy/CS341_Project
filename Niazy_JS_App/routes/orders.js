@@ -3,9 +3,10 @@ var router = express.Router();
 
 /* GET orders listing. */
 router.post('/', function(req, res) {
+    // month selector
     const month = req.body.month;
 
-    const ordersByMonth = { 
+    const ordersByMonth = { //using some static data to fill the months section
         Jan: [
             { topping: "plain", quantity: 28 },
             { topping: "cherry", quantity: 53 },
@@ -44,6 +45,7 @@ router.post('/', function(req, res) {
     };
 
     res.json(
+                //orderlist by month
                 {
                     month: month,
                     orders: ordersByMonth[month] || []

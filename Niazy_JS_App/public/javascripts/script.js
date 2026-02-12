@@ -70,12 +70,13 @@ $(document).ready(function() {
                 }
             );
 
-            // Click on a month to select it
+            // Click on a month to select it.
             $("#monthDropdown div").click(function() {
                 var selectedMonth = $(this).text();
                 $("#currentMonth").text(selectedMonth);
                 $("#monthDropdown").slideUp(200);
-
+                
+                //using post instead of XMLHttpResponse()
                 $.post('/orders', { month: selectedMonth }, function(data){
                     updateOrdersOnPage(data);
                 })
@@ -83,15 +84,20 @@ $(document).ready(function() {
        
         });
 
+//helper: function to update our order list.
 function updateOrdersOnPage(data) {
-    var ordersDiv = $("#ordersList");
+    var ordersDiv = $("#ordersList"); //selecting the Orders div
+    
+    //empty the section first.
     ordersDiv.empty();
 
+    //if no orders for the month
     if(!data.orders || data.orders.length === 0){
         ordersDiv.append("<p>No orders for this month.</p>");
         return;
     }
     
+    //updated orders list
     data.orders.forEach(function(order){
         ordersDiv.append(
             "<li>" + order.quantity + " " + order.topping + "</li>"
