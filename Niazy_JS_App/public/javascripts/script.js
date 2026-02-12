@@ -75,6 +75,27 @@ $(document).ready(function() {
                 var selectedMonth = $(this).text();
                 $("#currentMonth").text(selectedMonth);
                 $("#monthDropdown").slideUp(200);
+
+                $.post('/orders', { month: selectedMonth }, function(data){
+                    updateOrdersOnPage(data);
+                })
             }); 
        
         });
+
+function updateOrdersOnPage(data) {
+    var ordersDiv = $("#ordersList");
+    ordersDiv.empty();
+
+    if(!data.orders || data.orders.length === 0){
+        ordersDiv.append("<p>No orders for this month.</p>");
+        return;
+    }
+    
+    data.orders.forEach(function(order){
+        ordersDiv.append(
+            "<li>" + order.quantity + " " + order.topping + "</li>"
+        );
+
+    });
+}
