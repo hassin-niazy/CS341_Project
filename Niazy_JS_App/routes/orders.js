@@ -6,57 +6,40 @@ Date: 02/11/2026
 
 var express = require('express');
 var router = express.Router();
-
+var db = require('./dbms_promise'); //connected Database
 /* GET orders listing. */
-router.post('/', function(req, res) {
+router.post('/', async function(req, res) {
     // month selector
-    const month = req.body.month;
+    const monthStr = req.body.month;
 
-    const ordersByMonth = { //using some static data to fill the months section
-        Jan: [
-            { topping: "plain", quantity: 28 },
-            { topping: "cherry", quantity: 53 },
-            { topping: "chocolate", quantity: 22 }
-        ],
-        Feb: [
-            { topping: "plain", quantity: 25 },
-            { topping: "cherry", quantity: 28 },
-            { topping: "chocolate", quantity: 38}
-        ],
-        Mar: [
-            { topping: "plain", quantity: 50 },
-            { topping: "cherry", quantity: 68 },
-            { topping: "chocolate", quantity: 18}
-        ],
-        Apr: [
-            { topping: "plain", quantity: 56 },
-            { topping: "cherry", quantity: 24 },
-            { topping: "chocolate", quantity: 68}
-        ],
-        May: [
-            { topping: "plain", quantity: 36 },
-            { topping: "cherry", quantity: 75 },
-            { topping: "chocolate", quantity: 58}
-        ],
-        Jun: [
-            { topping: "plain", quantity: 50 },
-            { topping: "cherry", quantity: 80 },
-            { topping: "chocolate", quantity: 88}
-        ],
-        Jul: [
-            { topping: "plain", quantity: 52 },
-            { topping: "cherry", quantity: 83 },
-            { topping: "chocolate", quantity: 68}
-        ],
+    const monthMap = {
+        Jan: 1, Feb: 2, Mar: 3, Apr: 4,
+        May: 5, Jun: 6, Jul: 7, Aug: 8,
+        Sep: 9, Oct: 10, Nov: 11, Dec: 12
     };
 
-    res.json(
-                //orderlist by month
-                {
-                    month: month,
-                    orders: ordersByMonth[month] || []
-                }
-            );
+    const month = monthMap[monthStr];
+
+    const query = `
+        SELECT  t.name AS topping, SUM(o.quantity) AS quantity
+        FROM orders o
+        JOIN toppings t ON o.t_id = t.t_id
+        WHERE o.month = ?
+        GROUP BY t.name
+    `;
+
+    try {
+        const result = await db.query(query, [month]);
+
+        res.json({
+            month: monthStr,
+            orders: results
+        });
+        
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("Database error")
+    }
 });
 
 module.exports = router;
