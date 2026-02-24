@@ -1,13 +1,14 @@
 /* 
 This is the JS page to take track of orders.
 Author: Hassinullah Niazy
-Date: 02/11/2026
+Date: 02/21/2026
 */
 
 var express = require('express');
 var router = express.Router();
 var db = require('./dbms_promise'); //connected Database
-/* GET orders listing. */
+
+/* POST orders listing. */
 router.post('/', async function(req, res) {
     // month selector
     const monthStr = req.body.month;
@@ -19,7 +20,13 @@ router.post('/', async function(req, res) {
     };
 
     const month = monthMap[monthStr];
+    
+    //Validation Guard
+    if (!month) {
+    return res.status(400).json({ error: "Invalid month provided" });
+    }
 
+    
     const query = `
         SELECT  t.name AS topping, SUM(o.quantity) AS quantity
         FROM orders o
@@ -29,11 +36,11 @@ router.post('/', async function(req, res) {
     `;
 
     try {
-        const result = await db.query(query, [month]);
+        const result = await db.dbquery(query, [month]);
 
         res.json({
             month: monthStr,
-            orders: results
+            orders: result
         });
         
     } catch (err) {

@@ -29,7 +29,7 @@ var password = "JNFDONOEIQY";      //password (change to match your db, yes this
  *
  * @param query     the SQL query to perform (e.g., "SELECT * FROM ...")
  */
-exports.dbquery = function(query_str) {
+exports.dbquery = function(query_str, query_args = []) {
   return new Promise((resolve, reject) => {
     var dbclient;
     var results = null;
@@ -52,7 +52,7 @@ exports.dbquery = function(query_str) {
         //Step 2: Issue query
         function (results, callback) {
             //console.log("\n** retrieving data");
-            dbclient.query(query_str, callback);
+            dbclient.query(query_str, query_args, callback);
         },
 
         //Step 3: Collect results

@@ -29,16 +29,39 @@ $(document).ready(function() {
                 if (noteVegan === "vegan"){
                     alert("The cheesecake has dairy.")
                 } else {
-
                     $("#OrderDiv").hide();
                     $("#notes").hide();
                     $("#myButton1").hide();
-
                     $("#quantity").text("Quantity: " + quantity);
                     $("#topping").text("Topping: " + topping);
                     $("#comment").text("Note: " + note);
-
                     $("#hiddenDiv").show();   
+
+
+                    //Map the topping name to the database T_ID
+                    var toppingMap = {
+                        "plain": 1,
+                        "cherry": 2,
+                        "chocolate": 3,
+                        "vegan": 4
+                    };
+                    //matching t_id with the toppings map.
+                    var t_id = toppingMap[topping.toLowerCase()]; 
+
+                    //Send the data to POST route '/neworder'
+                    var newOrderData = {
+                        quantity: quantity,
+                        topping: t_id,
+                        notes: note
+                    };
+
+                    $.post('/neworder', newOrderData, function(response) {
+                        console.log("Order: ", response);
+
+                    }).fail(function(error) {
+                        console.error("Error inserting order: ", error);
+                    });
+
                 }
             });
             
