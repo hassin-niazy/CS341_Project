@@ -50,7 +50,7 @@ exports.dbquery = function(query_str, query_args = []) {
         },
 
         //Step 2: Issue query
-        function (results, callback) {
+        function (connectionResult, callback) {
             //console.log("\n** retrieving data");
             dbclient.query(query_str, query_args, callback);
         },

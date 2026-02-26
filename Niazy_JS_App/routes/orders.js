@@ -13,12 +13,14 @@ router.post('/', async function(req, res) {
     // month selector
     const monthStr = req.body.month;
 
+    //mapping month on to its integer value.
     const monthMap = {
         Jan: 1, Feb: 2, Mar: 3, Apr: 4,
         May: 5, Jun: 6, Jul: 7, Aug: 8,
         Sep: 9, Oct: 10, Nov: 11, Dec: 12
     };
 
+    //find the month
     const month = monthMap[monthStr];
     
     //Validation Guard
@@ -26,7 +28,7 @@ router.post('/', async function(req, res) {
     return res.status(400).json({ error: "Invalid month provided" });
     }
 
-    
+    //finding orders for the month using GROUP BY command to calculate the count.
     const query = `
         SELECT  t.name AS topping, SUM(o.quantity) AS quantity
         FROM orders o
@@ -35,6 +37,7 @@ router.post('/', async function(req, res) {
         GROUP BY t.name
     `;
 
+    //inserting order to the database.
     try {
         const result = await db.dbquery(query, [month]);
 
@@ -44,6 +47,7 @@ router.post('/', async function(req, res) {
         });
         
     } catch (err) {
+        //catch the error if it was from the Database.
         console.error(err);
         res.status(500).send("Database error")
     }

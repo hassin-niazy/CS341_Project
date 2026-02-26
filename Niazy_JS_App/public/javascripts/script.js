@@ -41,9 +41,9 @@ $(document).ready(function() {
                     //Map the topping name to the database T_ID
                     var toppingMap = {
                         "plain": 1,
-                        "cherry": 2,
+                        "vegan": 2,
                         "chocolate": 3,
-                        "vegan": 4
+                        "cherry": 4
                     };
                     //matching t_id with the toppings map.
                     var t_id = toppingMap[topping.toLowerCase()]; 
@@ -59,7 +59,8 @@ $(document).ready(function() {
                         console.log("Order: ", response);
 
                     }).fail(function(error) {
-                        console.error("Error inserting order: ", error);
+                        console.log("Status Code: ", error.status);
+                        console.log("Error Message: ", error.responseText);
                     });
 
                 }
